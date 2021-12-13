@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/auth/entity/user.entity';
 import { Repository } from 'typeorm';
@@ -33,5 +33,13 @@ export class BoardService {
 
   public async ReadAll(): Promise<Board[]> {
     return await this.boardRepository.find();
+  }
+
+  public async delete(id:number, user:User):Promise<void> {
+    const result = await this.boardRepository.delete({id,user});
+
+    if(result.affected === 0) {
+      throw new NotFoundException('cannot find')
+    }
   }
 }

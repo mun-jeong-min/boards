@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiTags } from '@nestjs/swagger';
 import { User } from 'src/auth/entity/user.entity';
@@ -32,6 +32,15 @@ export class BoardController {
     @GetUser() user:User
   ): Promise<void> {
       await this.boardService.create(body, user);
+  }
+
+  @UseGuards(AuthGuard())
+  @Delete('/:id')
+  public async delete(
+    @Param('id', ParseIntPipe) id,
+    @GetUser() user:User
+  ):Promise<void> {
+    return this.boardService.delete(id,user);
   }
 
   @Get('token')
