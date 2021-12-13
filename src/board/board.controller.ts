@@ -18,13 +18,7 @@ export class BoardController {
   ):Promise<Board[]> {
     return await this.boardService.ReadMine(user);
   }
-
-  @UseGuards(AuthGuard())
-  @Get('readAll')
-  public async ReadNotAuth(): Promise<Board[]> {
-    return await this.boardService.ReadAll()
-  }
-
+  
   @UseGuards(AuthGuard())
   @Post('create')
   public async create(

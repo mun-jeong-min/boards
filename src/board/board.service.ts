@@ -31,10 +31,6 @@ export class BoardService {
     return boards;
   }
 
-  public async ReadAll(): Promise<Board[]> {
-    return await this.boardRepository.find();
-  }
-
   public async delete(id:number, user:User):Promise<void> {
     const result = await this.boardRepository.delete({id,user});
 
