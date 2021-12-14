@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { title } from 'process';
 import { User } from 'src/auth/entity/user.entity';
 import { Repository } from 'typeorm';
 import { setDto } from './dto/set.dto';
@@ -18,7 +19,11 @@ export class BoardService {
           user
       })
   }
+  public async ReadAll(): Promise<Board[]> {
+    const boards = await this.boardRepository.find();
 
+    return boards;
+  }
   public async ReadMine(
     user:User,
   ):Promise<Board[]> {

@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Put, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiTags } from '@nestjs/swagger';
 import { User } from 'src/auth/entity/user.entity';
@@ -10,14 +10,6 @@ import { Board } from './entity/board.entity';
 @Controller('board')
 export class BoardController {
   constructor(private readonly boardService: BoardService) {}
-
-  @UseGuards(AuthGuard())
-  @Get('read')
-  public async Read(
-    @GetUser() user:User,
-  ):Promise<Board[]> {
-    return await this.boardService.ReadMine(user);
-  }
   
   @UseGuards(AuthGuard())
   @Post('create')
@@ -26,6 +18,20 @@ export class BoardController {
     @GetUser() user:User
   ): Promise<void> {
       await this.boardService.create(body, user);
+  }
+  
+  @UseGuards(AuthGuard())
+  @Get('readAll')
+  public async ReadAll():Promise<Board[]>{
+    return await this.boardService.ReadAll();
+  }
+  
+  @UseGuards(AuthGuard())
+  @Get('read')
+  public async Read(
+    @GetUser() user:User,
+  ):Promise<Board[]> {
+    return await this.boardService.ReadMine(user);
   }
 
   @UseGuards(AuthGuard())
