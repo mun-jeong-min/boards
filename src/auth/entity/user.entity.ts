@@ -24,4 +24,8 @@ export class User {
     @ApiProperty()
     @OneToMany(type => Board, board => board.user, {eager:true})
     boards:Board[];
+
+    @Column({nullable:true})
+    @Exclude()
+    refreshToken?: string;
 }
