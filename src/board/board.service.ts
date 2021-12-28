@@ -37,9 +37,6 @@ export class BoardService {
   }
 
   public async update(id: number, board:Board):Promise<void> {
-    await this.boardRepository.update(
-      id,
-      board
-    );
+    await this.boardRepository.update(id,board)
   }
 }

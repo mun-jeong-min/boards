@@ -52,7 +52,7 @@ export class BoardController {
   @Patch('update/:id')
   public async update(
     @Param('id', ParseIntPipe) id,
-    @Body() board:Board
+    @Body() board:Board,
   ): Promise<void> {
     return this.boardService.update(id,board)
   }

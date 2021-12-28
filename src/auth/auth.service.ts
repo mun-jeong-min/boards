@@ -43,6 +43,7 @@ export class AuthService {
     if (!(await compare(password, user.password))) {
       throw new BadRequestException();
     }
+    
     const payload = {id: user.id}
     const access_token = await this.jwtService.sign(payload);
 
