@@ -5,6 +5,7 @@ import * as dotenv from 'dotenv'
 import { Board } from './board/entity/board.entity';
 import { User } from './auth/entity/user.entity';
 import { AuthModule } from './auth/auth.module';
+import { EmailModule } from './email/email.module';
 dotenv.config();
 
 @Module({
@@ -20,6 +21,7 @@ dotenv.config();
       entities: [Board, User],
       synchronize: true,
   }),
+  EmailModule,
   ],
   controllers: [],
   providers: [],
